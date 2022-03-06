@@ -6,37 +6,89 @@
         xmlns:local="clr-namespace:StaffManagement"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
         Title="MainWindow" Height="450" Width="800">
     <Window.Resources>
         <Style TargetType="TabItem">
             <Setter Property="Height" Value="40"/>
+            <Setter Property="Width" Value="120"/>
+        </Style>
+        <Style TargetType="Button" x:Key="SidePanelButton">
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="Height" Value="50"/>
         </Style>
     </Window.Resources>
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition Width="0.4*"/>
-        </Grid.ColumnDefinitions>
-            
         <TabControl>
             <TabItem Header="Сотрудники">
-                <ListView>
-                    <ListView.View>
-                        <GridView AllowsColumnReorder="true">
-                            <GridViewColumn Header="Имя" Width="auto"/>
-                            <GridViewColumn Header="Фамилия" Width="auto" />
-                            <GridViewColumn Header="Отчество" Width="auto"/>
-                            <GridViewColumn Header="Должность" Width="auto"/>
-                            <GridViewColumn Header="Оклад" Width="auto"/>
-                        </GridView>
-                    </ListView.View>
-                </ListView>
-            </TabItem>
-            <TabItem Header="Отделы">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="0.4*"/>
+                    </Grid.ColumnDefinitions>
+                    <ListView>
+                        <ListView.View>
+                            <GridView AllowsColumnReorder="true">
+                                <GridViewColumn Header="Имя" Width="100"/>
+                                <GridViewColumn Header="Фамилия" Width="110" />
+                                <GridViewColumn Header="Отчество" Width="120"/>
+                                <GridViewColumn Header="Должность" Width="120"/>
+                                <GridViewColumn Header="Оклад" Width="100"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <StackPanel Grid.Column="1">
+                        <Button Content="Добавить сотрудника" Style="{StaticResource SidePanelButton}"/>
+                        <Button Content="Редактировать" Style="{StaticResource SidePanelButton}"/>
+                        <Button Content="Удалить" Style="{StaticResource SidePanelButton}"/>
+                    </StackPanel>
+                </Grid>
                 
             </TabItem>
             <TabItem Header="Должности">
-                
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="0.4*"/>
+                    </Grid.ColumnDefinitions>
+                    <ListView>
+                        <ListView.View>
+                            <GridView AllowsColumnReorder="true">
+                                <GridViewColumn Header="Название" Width="100"/>
+                                <GridViewColumn Header="Отдел" Width="110" />
+                                <GridViewColumn Header="Оклад" Width="120"/>
+                                <GridViewColumn Header="Текущий штат" Width="120"/>
+                                <GridViewColumn Header="Макс. штат" Width="100"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <StackPanel Grid.Column="1">
+                        <Button Content="Добавить должность" Style="{StaticResource SidePanelButton}"/>
+                        <Button Content="Редактировать" Style="{StaticResource SidePanelButton}"/>
+                        <Button Content="Удалить" Style="{StaticResource SidePanelButton}"/>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Отделы">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="0.4*"/>
+                    </Grid.ColumnDefinitions>
+                    <ListView>
+                        <ListView.View>
+                            <GridView AllowsColumnReorder="true">
+                                <GridViewColumn Header="Название отдела" Width="150"/>
+                                <GridViewColumn Header="Количество должностей" Width="150" />
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <StackPanel Grid.Column="1">
+                        <Button Content="Добавить отдел" Style="{StaticResource SidePanelButton}"/>
+                        <Button Content="Редактировать" Style="{StaticResource SidePanelButton}"/>
+                        <Button Content="Удалить" Style="{StaticResource SidePanelButton}"/>
+                    </StackPanel>
+                </Grid>
             </TabItem>
         </TabControl>
     </Grid>
