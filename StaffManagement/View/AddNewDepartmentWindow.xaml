@@ -1,0 +1,26 @@
+﻿<Window x:Class="StaffManagement.View.AddNewDepartmentWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:StaffManagement.ViewModel"
+        xmlns:local="clr-namespace:StaffManagement.View"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Name="AddNewDepartmentWind"
+        Title="AddNewDepartmentWindow" Height="300" Width="300">
+    <Window.DataContext>
+        <vm:MainViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <StackPanel VerticalAlignment="Center" Width="200">
+            <TextBlock Text="Name"/>
+            <TextBox Name="NameBlock" Text=""/>
+        </StackPanel>
+        <Button Grid.Row="1" Content="Add Department"/>
+    </Grid>
+</Window>

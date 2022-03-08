@@ -10,6 +10,7 @@ namespace StaffManagement.Model
     {
         private int _id;
         private string _name;
+        private int _departmentId;
         private Department _department;
         private int _salary;
         private int _maxCountOfStaff;
@@ -18,6 +19,7 @@ namespace StaffManagement.Model
         public string Name { get; set; }
         public int Salary { get; set; }
         public int MaxCountOfStaff { get; set; }
+        public int DepartmentId { get; set; }
         internal Department Department { get; set; }
     }
 }

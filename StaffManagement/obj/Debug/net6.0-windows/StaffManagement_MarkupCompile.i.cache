@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
 C:\Users\Максим\Desktop\StaffManagement\StaffManagement\App.xaml
-1-487866684
+7600435917
 
-13-2078040135
+2090946653
 2141190386436
-View\MainWindow.xaml;
+View\AddNewDepartmentWindow.xaml;View\AddNewEmployeeWindow.xaml;View\AddNewPositionWindow.xaml;View\EditDepartmentWindow.xaml;View\EditEmployeeWindow.xaml;View\EditPositionWindow.xaml;View\MainWindow.xaml;
 
-False
+True
 
