@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,5 +22,15 @@ namespace StaffManagement.Model
         public string Patronymic { get; set; }
         public int PositionId { get; set; }
         internal Position Position { get; set; }
+
+
+        [NotMapped]
+        public Position GetPositionByIdProp
+        {
+            get
+            {
+                return DataWorker.GetPositionById(PositionId);
+            }
+        }
     }
 }

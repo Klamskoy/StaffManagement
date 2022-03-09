@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,5 +22,7 @@ namespace StaffManagement.Model
         public int MaxCountOfStaff { get; set; }
         public int DepartmentId { get; set; }
         internal Department Department { get; set; }
+
+       
     }
 }

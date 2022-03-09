@@ -100,7 +100,17 @@ namespace StaffManagement.ViewModel
 
         #endregion
 
+        private List<Employee> _allEmployees = DataWorker.GetAllEmployees();
 
+        public List<Employee> AllEmployees
+        {
+            get { return _allEmployees; }
+            set
+            {
+                _allEmployees = value;
+                NotifyPropertyChanged("AllEmployees");
+            }
+        }
 
 
     }

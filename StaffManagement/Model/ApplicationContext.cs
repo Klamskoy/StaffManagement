@@ -15,6 +15,7 @@ namespace StaffManagement.Model
 
         public ApplicationContext()
         {
+            //Database.EnsureDeleted();
             Database.EnsureCreated();
         }
 

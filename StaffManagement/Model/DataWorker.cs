@@ -45,5 +45,28 @@ namespace StaffManagement.Model
 
         #endregion
 
+        public static List<Employee> GetAllEmployees()
+        {
+            var result = new List<Employee>();
+
+            using(ApplicationContext db = new ApplicationContext())
+            { 
+                result = db.Employees.ToList();
+            }
+
+            return result;
+        }
+
+        public static Position GetPositionById(int id)
+        {
+            Position res;
+            using(ApplicationContext db = new ApplicationContext())
+            {
+                res = db.Positions.FirstOrDefault(x => x.Id == id);
+                
+            }
+            return res;
+        }
+
     }
 }
