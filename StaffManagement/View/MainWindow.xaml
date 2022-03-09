@@ -4,10 +4,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:StaffManagement"
+        xmlns:vm="clr-namespace:StaffManagement.ViewModel"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
         Title="MainWindow" Height="450" Width="800">
+    <Window.DataContext>
+        <vm:MainViewModel/>
+    </Window.DataContext>
     <Window.Resources>
         <Style TargetType="TabItem">
             <Setter Property="Height" Value="40"/>
@@ -38,8 +42,10 @@
                         </ListView.View>
                     </ListView>
                     <StackPanel Grid.Column="1">
-                        <Button Content="Добавить сотрудника" Style="{StaticResource SidePanelButton}"/>
-                        <Button Content="Редактировать" Style="{StaticResource SidePanelButton}"/>
+                        <Button Content="Добавить сотрудника" Style="{StaticResource SidePanelButton}"
+                                Command="{Binding ShowAddNewEmployee}"/>
+                        <Button Content="Редактировать" Style="{StaticResource SidePanelButton}"
+                                Command="{Binding ShowEditEmployee}"/>
                         <Button Content="Удалить" Style="{StaticResource SidePanelButton}"/>
                     </StackPanel>
                 </Grid>
@@ -63,8 +69,10 @@
                         </ListView.View>
                     </ListView>
                     <StackPanel Grid.Column="1">
-                        <Button Content="Добавить должность" Style="{StaticResource SidePanelButton}"/>
-                        <Button Content="Редактировать" Style="{StaticResource SidePanelButton}"/>
+                        <Button Content="Добавить должность" Style="{StaticResource SidePanelButton}"
+                                Command="{Binding ShowAddNewPosition}"/>
+                        <Button Content="Редактировать" Style="{StaticResource SidePanelButton}"
+                                Command="{Binding ShowEditPosition}"/>
                         <Button Content="Удалить" Style="{StaticResource SidePanelButton}"/>
                     </StackPanel>
                 </Grid>
@@ -84,8 +92,10 @@
                         </ListView.View>
                     </ListView>
                     <StackPanel Grid.Column="1">
-                        <Button Content="Добавить отдел" Style="{StaticResource SidePanelButton}"/>
-                        <Button Content="Редактировать" Style="{StaticResource SidePanelButton}"/>
+                        <Button Content="Добавить отдел" Style="{StaticResource SidePanelButton}"
+                                Command="{Binding ShowAddNewDepartment}"/>
+                        <Button Content="Редактировать" Style="{StaticResource SidePanelButton}"
+                                Command="{Binding ShowEditDepartment}"/>
                         <Button Content="Удалить" Style="{StaticResource SidePanelButton}"/>
                     </StackPanel>
                 </Grid>
