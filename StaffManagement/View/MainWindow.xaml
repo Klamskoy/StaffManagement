@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Управление персоналом" Height="450" Width="800">
     <Window.DataContext>
         <vm:MainViewModel/>
     </Window.DataContext>
@@ -20,6 +20,9 @@
         <Style TargetType="Button" x:Key="SidePanelButton">
             <Setter Property="Margin" Value="10"/>
             <Setter Property="Height" Value="50"/>
+        </Style>
+        <Style TargetType="ListViewItem">
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
         </Style>
     </Window.Resources>
     <Grid>
@@ -62,14 +65,20 @@
                         <ColumnDefinition/>
                         <ColumnDefinition Width="0.4*"/>
                     </Grid.ColumnDefinitions>
-                    <ListView>
+                    <ListView ItemsSource="{Binding AllPositions}">
                         <ListView.View>
-                            <GridView AllowsColumnReorder="true">
-                                <GridViewColumn Header="Название" Width="100"/>
-                                <GridViewColumn Header="Отдел" Width="110" />
-                                <GridViewColumn Header="Оклад" Width="120"/>
-                                <GridViewColumn Header="Текущий штат" Width="120"/>
-                                <GridViewColumn Header="Макс. штат" Width="100"/>
+                            <GridView AllowsColumnReorder="true" >
+                                <GridViewColumn Header="Название" Width="100"
+                                                
+                                                DisplayMemberBinding="{Binding Path=Name}"/>
+                                <GridViewColumn Header="Отдел" Width="110"
+                                                DisplayMemberBinding="{Binding Path=GetDepartmentByIdProp.Name}"/>
+                                <GridViewColumn Header="Оклад" Width="120"
+                                                DisplayMemberBinding="{Binding Path=Salary}"/>
+                                <GridViewColumn Header="Текущий штат" Width="120"
+                                                DisplayMemberBinding="{Binding Path=CurrentCount}"/>
+                                <GridViewColumn Header="Макс. штат" Width="100"
+                                                DisplayMemberBinding="{Binding Path=MaxCountOfStaff}"/>
                             </GridView>
                         </ListView.View>
                     </ListView>
@@ -88,11 +97,13 @@
                         <ColumnDefinition/>
                         <ColumnDefinition Width="0.4*"/>
                     </Grid.ColumnDefinitions>
-                    <ListView>
+                    <ListView ItemsSource="{Binding AllDepartments}">
                         <ListView.View>
                             <GridView AllowsColumnReorder="true">
-                                <GridViewColumn Header="Название отдела" Width="150"/>
-                                <GridViewColumn Header="Количество должностей" Width="150" />
+                                <GridViewColumn Header="Название отдела" Width="150"
+                                                DisplayMemberBinding="{Binding Path=Name}"/>
+                                <GridViewColumn Header="Количество должностей" Width="150"
+                                                DisplayMemberBinding="{Binding Path=PositionCount}"/>
                             </GridView>
                         </ListView.View>
                     </ListView>

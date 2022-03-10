@@ -23,6 +23,25 @@ namespace StaffManagement.Model
         public int DepartmentId { get; set; }
         internal Department Department { get; set; }
 
-       
+       [NotMapped]
+       public int CurrentCount
+        {
+            get
+            {
+                using(ApplicationContext db = new ApplicationContext())
+                {
+                    return db.Positions.Count();
+                }
+            }
+        }
+
+        [NotMapped]
+        public Department GetDepartmentByIdProp
+        {
+            get
+            {
+                return DataWorker.GetDepartmentById(DepartmentId);
+            }
+        }
     }
 }

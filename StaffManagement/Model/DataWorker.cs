@@ -57,6 +57,28 @@ namespace StaffManagement.Model
             return result;
         }
 
+        public static List<Position> GetAllPositions()
+        {
+            var result = new List<Position>();
+            using(ApplicationContext db = new ApplicationContext())
+            {
+                result = db.Positions.ToList();
+            }
+
+            return result;
+        }
+
+        public static List<Department> GetAllDepartments()
+        {
+            var result = new List<Department>();
+            using(ApplicationContext db = new ApplicationContext())
+            {
+                result = db.Departments.ToList();
+            }
+
+            return result;
+        }
+
         public static Position GetPositionById(int id)
         {
             Position res;
@@ -66,6 +88,16 @@ namespace StaffManagement.Model
                 
             }
             return res;
+        }
+
+        public static Department GetDepartmentById(int id)
+        {
+            Department dep;
+            using(ApplicationContext db=  new ApplicationContext())
+            {
+                dep = db.Departments.FirstOrDefault(x => x.Id == id);
+            }
+            return dep;
         }
 
     }

@@ -112,6 +112,27 @@ namespace StaffManagement.ViewModel
             }
         }
 
+        private List<Position> _allPositions = DataWorker.GetAllPositions();
+        public List<Position> AllPositions
+        {
+            get { return _allPositions; }
+            set
+            {
+                _allPositions = value;
+                NotifyPropertyChanged("AllPositions");
+            }
+        }
+
+        private List<Department> _allDepartments = DataWorker.GetAllDepartments();
+        public List<Department> AllDepartments
+        {
+            get { return _allDepartments; }
+            set
+            {
+                _allDepartments = value;
+                NotifyPropertyChanged("AllDepartments");
+            }
+        }
 
     }
 }
