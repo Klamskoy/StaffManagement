@@ -106,11 +106,30 @@ namespace StaffManagement.Model
         {
             using(ApplicationContext db = new ApplicationContext())
             {
-                Department department = new Department() { Name = name };
-                db.Departments.Add(department);
-                
+                Department newDepartment = new Department() { Name = name };
+                db.Departments.Add(newDepartment);
                 db.SaveChanges();
                 
+            }
+        }
+
+        public static void AddNewPosition(string name, int salary, int maxStaff, Department department)
+        {
+            using(ApplicationContext db = new ApplicationContext())
+            {   
+                Position newPosition = new Position() { Name = name, Salary = salary, MaxCountOfStaff = maxStaff, Department = department, DepartmentId = department.Id };
+                db.Positions.Add(newPosition);
+                db.SaveChanges();
+            }
+        }
+
+        public static void AddNewEmployee(string name, string surname, string patronymic, Position position)
+        {
+            using(ApplicationContext db = new ApplicationContext())
+            {
+                Employee newEmployee = new Employee() { Name = name, Surname = surname, Patronymic = patronymic, Position = position, PositionId = position.Id };
+                db.Employees.Add(newEmployee);
+                db.SaveChanges();
             }
         }
 

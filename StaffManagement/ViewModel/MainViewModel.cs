@@ -13,6 +13,14 @@ namespace StaffManagement.ViewModel
     internal class MainViewModel : INotifyPropertyChanged
     {
         public string NewDepartmentName { get; set; }
+        public string NewPositionName { get; set; }
+        public int NewPositionSalary { get; set; }
+        public int NewPositionMaxStaff { get; set; }
+        public Department NewPositionDepartment { get; set; }
+        public string NewEmployeeName { get; set; }
+        public string NewEmployeeSurname { get; set; }
+        public string NewEmployeePatronymic { get; set; }
+        public Position NewEmployeePosition { get; set; }
 
         #region ADD/EDIT WINDOWS OPENING COMMANDS
         private RelayCommand _showAddNewEmployee;
@@ -142,7 +150,34 @@ namespace StaffManagement.ViewModel
                 );
             }
         }
-        
+
+        private RelayCommand _addNewPositionCommand;
+        public RelayCommand AddNewPositionCommand
+        {
+            get
+            {
+                return _addNewDepartmentCommand ?? new RelayCommand(obj =>
+                {
+                    DataWorker.AddNewPosition(NewPositionName, NewPositionSalary, NewPositionMaxStaff, NewPositionDepartment);
+                    UpdateAllListViews();
+                }
+                );
+            }
+        }
+
+        private RelayCommand _addNewEmployee;
+        public RelayCommand AddNewEmployeeCommand
+        {
+            get
+            {
+                return _addNewEmployee ?? new RelayCommand(obj =>
+                {
+                    DataWorker.AddNewEmployee(NewEmployeeName, NewEmployeeSurname, NewEmployeePatronymic, NewEmployeePosition);
+                    UpdateAllListViews();
+                }
+                );
+            }
+        }
         public void UpdateAllListViews()
         {
             AllDepartments = DataWorker.GetAllDepartments();

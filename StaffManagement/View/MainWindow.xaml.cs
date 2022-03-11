@@ -20,6 +20,8 @@ namespace StaffManagement
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        //code to refresh ListViews state
         public static ListView AllDepartmentsView;
         public static ListView AllPositionsView;
         public static ListView AllEmployeesView;

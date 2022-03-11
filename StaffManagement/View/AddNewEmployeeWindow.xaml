@@ -19,14 +19,17 @@
         </Grid.RowDefinitions>
         <StackPanel VerticalAlignment="Center" Width="200">
             <TextBlock Text="Name"/>
-            <TextBox Name="NameBlock" Text=""/>
+            <TextBox Name="NameBlock" Text="{Binding NewEmployeeName}"/>
             <TextBlock Text="Surname"/>
-            <TextBox Name="SurnameBlock" Text=""/>
+            <TextBox Name="SurnameBlock" Text="{Binding NewEmployeeSurname}"/>
             <TextBlock Text="Patronymic"/>
-            <TextBox Name="PatronymicBlock" Text=""/>
+            <TextBox Name="PatronymicBlock" Text="{Binding NewEmployeePatronymic}"/>
             <TextBlock Text="Position"/>
-            <ComboBox />
+            <ComboBox ItemsSource="{Binding AllPositions}"
+                      DisplayMemberPath="Name"
+                      SelectedItem="{Binding NewEmployeePosition}"/>
         </StackPanel>
-        <Button Grid.Row="1" Content="Add Employee"/>
+        <Button Grid.Row="1" Content="Add Employee"
+                Command="{Binding AddNewEmployeeCommand}"/>
     </Grid>
 </Window>
