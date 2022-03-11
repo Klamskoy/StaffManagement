@@ -33,13 +33,13 @@
                         <ColumnDefinition/>
                         <ColumnDefinition Width="0.4*"/>
                     </Grid.ColumnDefinitions>
-                    <ListView ItemsSource="{Binding AllEmployees}">
+                    <ListView Name="AllEmployeesListView" ItemsSource="{Binding AllEmployees}">
                         <ListView.View>
                             <GridView AllowsColumnReorder="true">
-                                <GridViewColumn Header="Имя" Width="100"
-                                                DisplayMemberBinding="{Binding Path=Name}"/>
-                                <GridViewColumn Header="Фамилия" Width="110" 
+                                <GridViewColumn Header="Фамилия" Width="100"
                                                 DisplayMemberBinding="{Binding Path=Surname}"/>
+                                <GridViewColumn Header="Имя" Width="110" 
+                                                DisplayMemberBinding="{Binding Path=Name}"/>
                                 <GridViewColumn Header="Отчество" Width="120"
                                                 DisplayMemberBinding="{Binding Path=Patronymic}"/>
                                 <GridViewColumn Header="Должность" Width="120"
@@ -65,7 +65,7 @@
                         <ColumnDefinition/>
                         <ColumnDefinition Width="0.4*"/>
                     </Grid.ColumnDefinitions>
-                    <ListView ItemsSource="{Binding AllPositions}">
+                    <ListView Name="AllPositionsListView" ItemsSource="{Binding AllPositions}">
                         <ListView.View>
                             <GridView AllowsColumnReorder="true" >
                                 <GridViewColumn Header="Название" Width="100"
@@ -97,7 +97,7 @@
                         <ColumnDefinition/>
                         <ColumnDefinition Width="0.4*"/>
                     </Grid.ColumnDefinitions>
-                    <ListView ItemsSource="{Binding AllDepartments}">
+                    <ListView Name="AllDepartmentsListView" ItemsSource="{Binding AllDepartments}">
                         <ListView.View>
                             <GridView AllowsColumnReorder="true">
                                 <GridViewColumn Header="Название отдела" Width="150"

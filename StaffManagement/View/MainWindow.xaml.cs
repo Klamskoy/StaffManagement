@@ -20,9 +20,15 @@ namespace StaffManagement
     /// </summary>
     public partial class MainWindow : Window
     {
+        public static ListView AllDepartmentsView;
+        public static ListView AllPositionsView;
+        public static ListView AllEmployeesView;
         public MainWindow()
         {
             InitializeComponent();
+            AllDepartmentsView = AllDepartmentsListView;
+            AllPositionsView = AllPositionsListView;
+            AllEmployeesView = AllEmployeesListView;
         }
     }
 }

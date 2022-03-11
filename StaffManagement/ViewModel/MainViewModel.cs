@@ -1,8 +1,10 @@
 ﻿using StaffManagement.Model;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,6 +12,8 @@ namespace StaffManagement.ViewModel
 {
     internal class MainViewModel : INotifyPropertyChanged
     {
+        public string NewDepartmentName { get; set; }
+
         #region ADD/EDIT WINDOWS OPENING COMMANDS
         private RelayCommand _showAddNewEmployee;
         public RelayCommand ShowAddNewEmployee
@@ -89,15 +93,6 @@ namespace StaffManagement.ViewModel
             }
         }
 
-        public event PropertyChangedEventHandler? PropertyChanged;
-        private void NotifyPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
-
         #endregion
 
         private List<Employee> _allEmployees = DataWorker.GetAllEmployees();
@@ -119,7 +114,7 @@ namespace StaffManagement.ViewModel
             set
             {
                 _allPositions = value;
-                NotifyPropertyChanged("AllPositions");
+                NotifyPropertyChanged("AddPositions");
             }
         }
 
@@ -133,6 +128,52 @@ namespace StaffManagement.ViewModel
                 NotifyPropertyChanged("AllDepartments");
             }
         }
+
+        private RelayCommand _addNewDepartmentCommand;
+        public RelayCommand AddNewDepartmentCommand
+        {
+            get
+            {
+                return _addNewDepartmentCommand ?? new RelayCommand(obj =>
+                 {
+                     DataWorker.AddNewDepartment(NewDepartmentName);
+                     UpdateAllListViews();
+                 }
+                );
+            }
+        }
+        
+        public void UpdateAllListViews()
+        {
+            AllDepartments = DataWorker.GetAllDepartments();
+            MainWindow.AllDepartmentsView.ItemsSource = null;
+            MainWindow.AllDepartmentsView.Items.Clear();
+            MainWindow.AllDepartmentsView.ItemsSource = AllDepartments;
+            MainWindow.AllDepartmentsView.Items.Refresh();
+
+            AllPositions = DataWorker.GetAllPositions();
+            MainWindow.AllPositionsView.ItemsSource = null;
+            MainWindow.AllPositionsView.Items.Clear();
+            MainWindow.AllPositionsView.ItemsSource = AllPositions;
+            MainWindow.AllPositionsView.Items.Refresh();
+
+            AllEmployees = DataWorker.GetAllEmployees();
+            MainWindow.AllEmployeesView.ItemsSource = null;
+            MainWindow.AllEmployeesView.Items.Clear();
+            MainWindow.AllEmployeesView.ItemsSource = AllEmployees;
+            MainWindow.AllEmployeesView.Items.Refresh();
+        }
+
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+        private void NotifyPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
 
     }
 }

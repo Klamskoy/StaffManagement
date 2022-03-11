@@ -1,6 +1,8 @@
 ﻿using StaffManagement.View;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -71,7 +73,7 @@ namespace StaffManagement.Model
         public static List<Department> GetAllDepartments()
         {
             var result = new List<Department>();
-            using(ApplicationContext db = new ApplicationContext())
+            using (ApplicationContext db = new ApplicationContext())
             {
                 result = db.Departments.ToList();
             }
@@ -92,12 +94,24 @@ namespace StaffManagement.Model
 
         public static Department GetDepartmentById(int id)
         {
-            Department dep;
+            Department res;
             using(ApplicationContext db=  new ApplicationContext())
             {
-                dep = db.Departments.FirstOrDefault(x => x.Id == id);
+                res = db.Departments.FirstOrDefault(x => x.Id == id);
             }
-            return dep;
+            return res;
+        }
+
+        public static void AddNewDepartment(string name)
+        {
+            using(ApplicationContext db = new ApplicationContext())
+            {
+                Department department = new Department() { Name = name };
+                db.Departments.Add(department);
+                
+                db.SaveChanges();
+                
+            }
         }
 
     }
