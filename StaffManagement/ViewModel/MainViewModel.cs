@@ -137,6 +137,90 @@ namespace StaffManagement.ViewModel
             }
         }
 
+        private Department _selectedDepartment;
+        public Department SelectedDepartment
+        {
+            get
+            {
+                return _selectedDepartment;
+            }
+            set
+            {
+                _selectedDepartment = value;
+                NotifyPropertyChanged("SelectedDepartment");
+            }
+        }
+
+        private Position _selectedPosition;
+        public Position SelectedPosition
+        {
+            get
+            {
+                return _selectedPosition;
+            }
+            set
+            {
+                _selectedPosition = value;
+                NotifyPropertyChanged("SelectedPosition");
+            }
+        }
+
+        private Employee _selectedEmployee;
+        public Employee SelectedEmployee
+        {
+            get
+            {
+                return _selectedEmployee;
+            }
+            set
+            {
+                _selectedEmployee = value;
+                NotifyPropertyChanged("SelectedEmployee");
+            }
+        }
+
+        private RelayCommand _deleteDepartment;
+        public RelayCommand DeleteDepartment
+        {
+            get
+            {
+                return _deleteDepartment ?? new RelayCommand(obj =>
+                {
+                    DataWorker.DeleteDepartment(SelectedDepartment);
+                    UpdateAllListViews();
+                }
+                );
+            }
+        }
+
+        private RelayCommand _deletePosition;
+        public RelayCommand DeletePosition
+        {
+            get
+            {
+                return _deletePosition ?? new RelayCommand(obj =>
+                {
+                    DataWorker.DeletePosition(SelectedPosition);
+                    UpdateAllListViews();
+                }
+                );
+            }
+        }
+
+        private RelayCommand _deleteEmployee;
+        public RelayCommand DeleteEmployee
+        {
+            get
+            {
+                return _deleteEmployee ?? new RelayCommand(obj =>
+                {
+                    DataWorker.DeleteEmployee(SelectedEmployee);
+                    UpdateAllListViews();
+                }
+                );
+            }
+        }
+
         private RelayCommand _addNewDepartmentCommand;
         public RelayCommand AddNewDepartmentCommand
         {

@@ -133,5 +133,32 @@ namespace StaffManagement.Model
             }
         }
 
+        public static void DeleteDepartment(Department department)
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                db.Departments.Remove(department);
+                db.SaveChanges();
+            }
+        }
+
+        public static void DeletePosition(Position position)
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                db.Positions.Remove(position);
+                db.SaveChanges();
+            }
+        }
+
+        public static void DeleteEmployee(Employee employee)
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                db.Employees.Remove(employee);
+                db.SaveChanges();
+            }
+        }
+
     }
 }
