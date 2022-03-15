@@ -8,10 +8,9 @@
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
-        Title="Управление персоналом" Height="450" Width="800">
-    <Window.DataContext>
-        <vm:MainViewModel/>
-    </Window.DataContext>
+        Title="Управление персоналом" Height="450" Width="800"
+        DataContext="{DynamicResource mainViewModel}">
+
     <Window.Resources>
         <Style TargetType="TabItem">
             <Setter Property="Height" Value="40"/>
@@ -102,7 +101,7 @@
                         <ColumnDefinition Width="0.4*"/>
                     </Grid.ColumnDefinitions>
                     <ListView Name="AllDepartmentsListView" ItemsSource="{Binding AllDepartments}"
-                              SelectedItem="{Binding SelectedDepartment}">
+                              SelectedItem="{Binding SelectedDepartment, Mode=TwoWay}">
                         <ListView.View>
                             <GridView AllowsColumnReorder="true">
                                 <GridViewColumn Header="Название отдела" Width="350"

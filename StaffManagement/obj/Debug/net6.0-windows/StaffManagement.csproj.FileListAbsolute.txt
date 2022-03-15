@@ -64,3 +64,6 @@ C:\Users\Максим\Desktop\StaffManagement\StaffManagement\obj\Debug\net6.0-w
 C:\Users\Максим\Desktop\StaffManagement\StaffManagement\obj\Debug\net6.0-windows\View\EditDepartmentWindow.baml
 C:\Users\Максим\Desktop\StaffManagement\StaffManagement\obj\Debug\net6.0-windows\View\EditEmployeeWindow.baml
 C:\Users\Максим\Desktop\StaffManagement\StaffManagement\obj\Debug\net6.0-windows\View\EditPositionWindow.baml
+C:\Users\Максим\Desktop\StaffManagement\StaffManagement\obj\Debug\net6.0-windows\StaffManagement.Properties.Resources.resources
+C:\Users\Максим\Desktop\StaffManagement\StaffManagement\obj\Debug\net6.0-windows\StaffManagement.csproj.GenerateResource.cache
+C:\Users\Максим\Desktop\StaffManagement\StaffManagement\obj\Debug\net6.0-windows\App.baml

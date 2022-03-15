@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace StaffManagement.Model
 {
@@ -157,6 +158,23 @@ namespace StaffManagement.Model
             {
                 db.Employees.Remove(employee);
                 db.SaveChanges();
+            }
+        }
+
+        public static void EditDepartment(Department selectedDepartment, string newName)
+        {
+            using(ApplicationContext db = new ApplicationContext())
+            {
+                if(selectedDepartment != null)
+                {
+                    Department department = db.Departments.Where(u => u.Name == selectedDepartment.Name).FirstOrDefault();
+                    department.Name = newName;
+                    db.SaveChanges();
+                }
+                else
+                {
+                    MessageBox.Show($"{newName}");
+                }
             }
         }
 

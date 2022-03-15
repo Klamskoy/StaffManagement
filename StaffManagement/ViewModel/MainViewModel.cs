@@ -7,6 +7,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace StaffManagement.ViewModel
 {
@@ -186,8 +187,16 @@ namespace StaffManagement.ViewModel
             {
                 return _deleteDepartment ?? new RelayCommand(obj =>
                 {
-                    DataWorker.DeleteDepartment(SelectedDepartment);
-                    UpdateAllListViews();
+                    if(SelectedDepartment == null)
+                    {
+                        DeleteDepartment.CanExecute(false);
+                    }
+                    else
+                    {
+                        DataWorker.DeleteDepartment(SelectedDepartment);
+                        UpdateAllListViews();
+                    }
+                    
                 }
                 );
             }
@@ -214,6 +223,7 @@ namespace StaffManagement.ViewModel
             {
                 return _deleteEmployee ?? new RelayCommand(obj =>
                 {
+
                     DataWorker.DeleteEmployee(SelectedEmployee);
                     UpdateAllListViews();
                 }
@@ -240,7 +250,7 @@ namespace StaffManagement.ViewModel
         {
             get
             {
-                return _addNewDepartmentCommand ?? new RelayCommand(obj =>
+                return _addNewPositionCommand ?? new RelayCommand(obj =>
                 {
                     DataWorker.AddNewPosition(NewPositionName, NewPositionSalary, NewPositionMaxStaff, NewPositionDepartment);
                     UpdateAllListViews();
@@ -249,12 +259,12 @@ namespace StaffManagement.ViewModel
             }
         }
 
-        private RelayCommand _addNewEmployee;
+        private RelayCommand _addNewEmployeeCommand;
         public RelayCommand AddNewEmployeeCommand
         {
             get
             {
-                return _addNewEmployee ?? new RelayCommand(obj =>
+                return _addNewEmployeeCommand ?? new RelayCommand(obj =>
                 {
                     DataWorker.AddNewEmployee(NewEmployeeName, NewEmployeeSurname, NewEmployeePatronymic, NewEmployeePosition);
                     UpdateAllListViews();
@@ -262,6 +272,31 @@ namespace StaffManagement.ViewModel
                 );
             }
         }
+
+        private RelayCommand _editDepartmentCommand;
+        public RelayCommand EditDepartmentCommand
+        {
+            get
+            {
+                return _editDepartmentCommand ?? new RelayCommand(obj =>
+                {
+                    if(SelectedDepartment == null)
+                    {
+                        EditDepartmentCommand.CanExecute(false);
+                        MessageBox.Show("Cannot do that!");
+                    }
+
+                    else
+                    {
+
+                        DataWorker.EditDepartment(SelectedDepartment, NewDepartmentName);
+                        UpdateAllListViews();
+                    }
+                }
+                );
+            }
+        }
+
         public void UpdateAllListViews()
         {
             AllDepartments = DataWorker.GetAllDepartments();
@@ -292,6 +327,8 @@ namespace StaffManagement.ViewModel
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
+
+       
 
 
     }

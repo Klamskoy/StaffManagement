@@ -5,13 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:StaffManagement.View"
         xmlns:vm="clr-namespace:StaffManagement.ViewModel"
+        xmlns:vm1="clr-namespace:StaffManagement"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Title="EditDepartmentWindow" Height="300" Width="300"
-        Name="EditDepartmentWnd">
-    <Window.DataContext>
-        <vm:MainViewModel/>
-    </Window.DataContext>
+        Name="EditDepartmentWnd"
+        DataContext="{DynamicResource mainViewModel}"
+        >
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -19,8 +19,9 @@
         </Grid.RowDefinitions>
         <StackPanel VerticalAlignment="Center" Width="200">
             <TextBlock Text="New name"/>
-            <TextBox/>
+            <TextBox Text="{Binding NewDepartmentName}"/>
         </StackPanel>
-        <Button Grid.Row="1" Content="Edit Department"/>
+        <Button Grid.Row="1" Content="Edit Department"
+                Command="{Binding EditDepartmentCommand}"/>
     </Grid>
 </Window>
