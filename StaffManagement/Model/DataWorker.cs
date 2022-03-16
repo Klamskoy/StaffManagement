@@ -171,7 +171,7 @@ namespace StaffManagement.Model
             }
         }
 
-        public static void EditPosition(Position selectedPosition, string newName, int newSalary, int newMaxStaff, Department newDepartment)
+        public static void EditPosition(Position selectedPosition, string newName, int newSalary, int newMaxStaff, int newDepartmentId)
         {
             using(ApplicationContext db = new ApplicationContext())
             {
@@ -179,12 +179,12 @@ namespace StaffManagement.Model
                 position.Name = newName;
                 position.Salary = newSalary;
                 position.MaxCountOfStaff = newMaxStaff;
-                position.Department = newDepartment;
+                position.DepartmentId = newDepartmentId;
                 db.SaveChanges();
             }
         }
 
-        public static void EditEmployee(Employee selectedEmployee, string newName, string newSurname, string newPatronymic, Position newPosition)
+        public static void EditEmployee(Employee selectedEmployee, string newName, string newSurname, string newPatronymic, int newPositionId)
         {
             using(ApplicationContext db = new ApplicationContext())
             {
@@ -192,7 +192,7 @@ namespace StaffManagement.Model
                 employee.Name = newName;
                 employee.Surname = newSurname;
                 employee.Patronymic = newPatronymic;
-                employee.Position = newPosition;
+                employee.PositionId = newPositionId;
                 db.SaveChanges();
             }
         }

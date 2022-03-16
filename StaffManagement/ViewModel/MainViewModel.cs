@@ -327,7 +327,7 @@ namespace StaffManagement.ViewModel
                     }
                     else
                     {
-                        DataWorker.EditPosition(SelectedPosition, NewPositionName, NewPositionSalary, NewPositionMaxStaff, NewPositionDepartment);
+                        DataWorker.EditPosition(SelectedPosition, NewPositionName, NewPositionSalary, NewPositionMaxStaff, NewPositionDepartment.Id);
                         UpdateAllListViews();
                         NewPositionName = "";
                         NewPositionSalary = 0;
@@ -352,11 +352,12 @@ namespace StaffManagement.ViewModel
                     }
                     else
                     {
-                        DataWorker.EditEmployee(SelectedEmployee, NewEmployeeName, NewEmployeeSurname, NewEmployeePatronymic, NewEmployeePosition);
+                        DataWorker.EditEmployee(SelectedEmployee, NewEmployeeName, NewEmployeeSurname, NewEmployeePatronymic, NewEmployeePosition.Id);
                         UpdateAllListViews();
                         NewEmployeeName = "";
                         NewEmployeeSurname = "";
                         NewEmployeePatronymic = "";
+                        
                     }
                 }
                 );
