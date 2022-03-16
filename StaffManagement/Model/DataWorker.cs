@@ -165,18 +165,25 @@ namespace StaffManagement.Model
         {
             using(ApplicationContext db = new ApplicationContext())
             {
-                if(selectedDepartment != null)
-                {
-                    Department department = db.Departments.Where(u => u.Name == selectedDepartment.Name).FirstOrDefault();
-                    department.Name = newName;
-                    db.SaveChanges();
-                }
-                else
-                {
-                    MessageBox.Show($"{newName}");
-                }
+                Department department = db.Departments.Where(u => u.Name == selectedDepartment.Name).FirstOrDefault();
+                department.Name = newName;
+                db.SaveChanges();
             }
         }
+
+        public static void EditPosition(Position selectedPosition, string newName, int newSalary, int newMaxStaff, Department newDepartment)
+        {
+            using(ApplicationContext db = new ApplicationContext())
+            {
+                Position position = db.Positions.Where(u => u.Name == selectedPosition.Name).FirstOrDefault();
+                position.Name = newName;
+                position.Salary = newSalary;
+                position.MaxCountOfStaff = newMaxStaff;
+                position.Department = newDepartment;
+                db.SaveChanges();
+            }
+        }
+
 
     }
 }

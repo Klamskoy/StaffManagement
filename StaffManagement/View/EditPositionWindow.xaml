@@ -7,26 +7,27 @@
         xmlns:vm="clr-namespace:StaffManagement.ViewModel"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="EditPositionWindow" Height="300" Width="300"
-        Name="EditPositionWnd">
-    <Window.DataContext>
-        <vm:MainViewModel/>
-    </Window.DataContext>
+        Height="300" Width="300"
+        Name="EditPositionWnd"
+        DataContext="{DynamicResource mainViewModel}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
         <StackPanel VerticalAlignment="Center" Width="200">
-            <TextBlock Text="New name"/>
-            <TextBox/>
-            <TextBlock Text="New salary"/>
-            <TextBox/>
-            <TextBlock Text="Max count of staff"/>
-            <TextBox/>
-            <TextBlock Text="New department"/>
-            <ComboBox/>
+            <TextBlock Text="Новое название"/>
+            <TextBox Text="{Binding NewPositionName}"/>
+            <TextBlock Text="Новый оклад"/>
+            <TextBox Text="{Binding NewPositionSalary}"/>
+            <TextBlock Text="Максимальный штат(чел.)"/>
+            <TextBox Text="{Binding NewPositionMaxStaff}"/>
+            <TextBlock Text="Отдел"/>
+            <ComboBox ItemsSource="{Binding AllDepartments}"
+                      SelectedItem="{Binding NewPositionDepartment}"
+                      DisplayMemberPath="Name"/>
         </StackPanel>
-        <Button Grid.Row="1" Content="Edit Position"/>
+        <Button Grid.Row="1" Content="Редактировать позицию"
+                Command="{Binding EditPositionCommand}"/>
     </Grid>
 </Window>

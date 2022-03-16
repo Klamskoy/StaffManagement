@@ -7,29 +7,27 @@
         xmlns:vm="clr-namespace:StaffManagement.ViewModel"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="AddNewEmployeeWindow" Height="300" Width="300"
-        Name="AddNewEmployeeWnd">
-    <Window.DataContext>
-        <vm:MainViewModel/>
-    </Window.DataContext>
+        Height="300" Width="300"
+        Name="AddNewEmployeeWnd"
+        DataContext="{DynamicResource mainViewModel}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
         <StackPanel VerticalAlignment="Center" Width="200">
-            <TextBlock Text="Name"/>
+            <TextBlock Text="Имя"/>
             <TextBox Name="NameBlock" Text="{Binding NewEmployeeName}"/>
-            <TextBlock Text="Surname"/>
+            <TextBlock Text="Фамилия"/>
             <TextBox Name="SurnameBlock" Text="{Binding NewEmployeeSurname}"/>
-            <TextBlock Text="Patronymic"/>
+            <TextBlock Text="Отчество"/>
             <TextBox Name="PatronymicBlock" Text="{Binding NewEmployeePatronymic}"/>
-            <TextBlock Text="Position"/>
+            <TextBlock Text="Должность"/>
             <ComboBox ItemsSource="{Binding AllPositions}"
                       DisplayMemberPath="Name"
                       SelectedItem="{Binding NewEmployeePosition}"/>
         </StackPanel>
-        <Button Grid.Row="1" Content="Add Employee"
+        <Button Grid.Row="1" Content="Добавить сотрудника"
                 Command="{Binding AddNewEmployeeCommand}"/>
     </Grid>
 </Window>

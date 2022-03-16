@@ -7,7 +7,7 @@
         xmlns:vm="clr-namespace:StaffManagement.ViewModel"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="EditEmployeeWindow" Height="300" Width="300"
+        Height="300" Width="300"
         Name="EditEmployeeWnd">
     <Window.DataContext>
         <vm:MainViewModel/>

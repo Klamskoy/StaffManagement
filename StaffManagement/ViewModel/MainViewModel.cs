@@ -96,6 +96,7 @@ namespace StaffManagement.ViewModel
             {
                 return _showEditDepartment ?? new RelayCommand(obj =>
                 {
+                    NewDepartmentName = "";
                     DataWorker.ShowEditDepartmentWindow();
                 }
                 );
@@ -180,6 +181,7 @@ namespace StaffManagement.ViewModel
             }
         }
 
+        #region COMMANDS TO DELETE 
         private RelayCommand _deleteDepartment;
         public RelayCommand DeleteDepartment
         {
@@ -231,6 +233,9 @@ namespace StaffManagement.ViewModel
             }
         }
 
+        #endregion
+
+        #region COMMANDS TO ADD
         private RelayCommand _addNewDepartmentCommand;
         public RelayCommand AddNewDepartmentCommand
         {
@@ -273,6 +278,9 @@ namespace StaffManagement.ViewModel
             }
         }
 
+        #endregion
+
+        #region COMMANDS TO EDIT
         private RelayCommand _editDepartmentCommand;
         public RelayCommand EditDepartmentCommand
         {
@@ -283,7 +291,7 @@ namespace StaffManagement.ViewModel
                     if(SelectedDepartment == null)
                     {
                         EditDepartmentCommand.CanExecute(false);
-                        MessageBox.Show("Cannot do that!");
+                        MessageBox.Show("Выберите отдел!", "Ошибка");
                     }
 
                     else
@@ -291,12 +299,52 @@ namespace StaffManagement.ViewModel
 
                         DataWorker.EditDepartment(SelectedDepartment, NewDepartmentName);
                         UpdateAllListViews();
+                        NewDepartmentName = "";
                     }
                 }
                 );
             }
         }
 
+        private RelayCommand _editPositionCommand;
+        public RelayCommand EditPositionCommand
+        {
+            get
+            {
+                return _editPositionCommand ?? new RelayCommand(obj =>
+                {
+                    if(SelectedPosition == null)
+                    {
+                        EditPositionCommand.CanExecute(false);
+                        MessageBox.Show("Выберите позицию!", "Ошибка");
+                    }
+                    else
+                    {
+                        DataWorker.EditPosition(SelectedPosition, NewPositionName, NewPositionSalary, NewPositionMaxStaff, NewPositionDepartment);
+                        UpdateAllListViews();
+                        NewPositionName = "";
+                        NewPositionSalary = 0;
+                        NewPositionMaxStaff = 0;
+                    }
+                }
+                );
+            }
+        }
+
+        private RelayCommand _editEmployeeCommand;
+        public RelayCommand EditEmployeeCommand
+        {
+            get
+            {
+                return _editEmployeeCommand ?? new RelayCommand(obj =>
+                {
+
+                }
+                );
+            }
+        }
+
+        #endregion
         public void UpdateAllListViews()
         {
             AllDepartments = DataWorker.GetAllDepartments();
