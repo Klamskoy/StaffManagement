@@ -245,6 +245,7 @@ namespace StaffManagement.ViewModel
                  {
                      DataWorker.AddNewDepartment(NewDepartmentName);
                      UpdateAllListViews();
+                     NewDepartmentName = "";
                  }
                 );
             }
@@ -259,6 +260,9 @@ namespace StaffManagement.ViewModel
                 {
                     DataWorker.AddNewPosition(NewPositionName, NewPositionSalary, NewPositionMaxStaff, NewPositionDepartment);
                     UpdateAllListViews();
+                    NewPositionName = "";
+                    NewPositionSalary = 0;
+                    NewPositionMaxStaff = 0;
                 }
                 );
             }
@@ -273,6 +277,9 @@ namespace StaffManagement.ViewModel
                 {
                     DataWorker.AddNewEmployee(NewEmployeeName, NewEmployeeSurname, NewEmployeePatronymic, NewEmployeePosition);
                     UpdateAllListViews();
+                    NewEmployeeName = "";
+                    NewEmployeeSurname = "";
+                    NewEmployeePatronymic = "";
                 }
                 );
             }
@@ -338,7 +345,19 @@ namespace StaffManagement.ViewModel
             {
                 return _editEmployeeCommand ?? new RelayCommand(obj =>
                 {
-
+                    if(SelectedEmployee == null)
+                    {
+                        EditEmployeeCommand.CanExecute(false);
+                        MessageBox.Show("Выберите позицию!", "Ошибка");
+                    }
+                    else
+                    {
+                        DataWorker.EditEmployee(SelectedEmployee, NewEmployeeName, NewEmployeeSurname, NewEmployeePatronymic, NewEmployeePosition);
+                        UpdateAllListViews();
+                        NewEmployeeName = "";
+                        NewEmployeeSurname = "";
+                        NewEmployeePatronymic = "";
+                    }
                 }
                 );
             }

@@ -8,25 +8,26 @@
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Height="300" Width="300"
-        Name="EditEmployeeWnd">
-    <Window.DataContext>
-        <vm:MainViewModel/>
-    </Window.DataContext>
+        Name="EditEmployeeWnd"
+        DataContext="{DynamicResource mainViewModel}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
         <StackPanel VerticalAlignment="Center" Width="200">
-            <TextBlock Text="New name"/>
-            <TextBox/>
-            <TextBlock Text="New surname"/>
-            <TextBox/>
-            <TextBlock Text="New patronymic"/>
-            <TextBox/>
-            <TextBlock Text="New position"/>
-            <ComboBox/>
+            <TextBlock Text="Имя"/>
+            <TextBox Text="{Binding NewEmployeeName}"/>
+            <TextBlock Text="Фамилия"/>
+            <TextBox Text="{Binding NewEmployeeSurname}"/>
+            <TextBlock Text="Отчество"/>
+            <TextBox Text="{Binding NewEmployeePatronymic}"/>
+            <TextBlock Text="Должность"/>
+            <ComboBox ItemsSource="{Binding AllPositions}"
+                      SelectedItem="{Binding NewEmployeePosition}"
+                      DisplayMemberPath="Name"/>
         </StackPanel>
-        <Button Grid.Row="1" Content="Edit User"/>
+        <Button Grid.Row="1" Content="Редактировать сотрудника"
+                Command="{Binding EditEmployeeCommand}"/>
     </Grid>
 </Window>

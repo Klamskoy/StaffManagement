@@ -184,6 +184,19 @@ namespace StaffManagement.Model
             }
         }
 
+        public static void EditEmployee(Employee selectedEmployee, string newName, string newSurname, string newPatronymic, Position newPosition)
+        {
+            using(ApplicationContext db = new ApplicationContext())
+            {
+                Employee employee = db.Employees.Where(u => u.Name == selectedEmployee.Name).FirstOrDefault();
+                employee.Name = newName;
+                employee.Surname = newSurname;
+                employee.Patronymic = newPatronymic;
+                employee.Position = newPosition;
+                db.SaveChanges();
+            }
+        }
+
 
     }
 }
