@@ -218,6 +218,8 @@ namespace StaffManagement.ViewModel
             {
                 return _addNewDepartmentCommand ?? new RelayCommand(obj =>
                  {
+                     Window win = obj as Window;
+
                      if (NewDepartmentName == null || NewDepartmentName == "")
                      {
                          MessageBox.Show("Заполните поле!", "Ошибка");
@@ -227,6 +229,7 @@ namespace StaffManagement.ViewModel
                          DataWorker.AddNewDepartment(NewDepartmentName);
                          UpdateAllListViews();
                          NewDepartmentName = "";
+                         win.Close();
                      }
                  }
             );
@@ -240,6 +243,8 @@ namespace StaffManagement.ViewModel
             {
                 return _addNewPositionCommand ?? new RelayCommand(obj =>
                 {
+                    Window win = obj as Window;
+
                     if (NewPositionName == "" || NewPositionSalary == 0 || NewPositionMaxStaff == 0 || NewPositionDepartment == null)
                     {
                         MessageBox.Show("Заполните все поля!", "Ошибка");
@@ -251,6 +256,7 @@ namespace StaffManagement.ViewModel
                         NewPositionName = "";
                         NewPositionSalary = 0;
                         NewPositionMaxStaff = 0;
+                        win.Close();
                     }
                 }
                 );
@@ -264,6 +270,8 @@ namespace StaffManagement.ViewModel
             {
                 return _addNewEmployeeCommand ?? new RelayCommand(obj =>
                 {
+                    Window win = obj as Window;
+
                     if (NewEmployeeName == "" || NewEmployeeSurname == "" || NewEmployeePatronymic == "" || NewEmployeePosition == null)
                     {
                         MessageBox.Show("Заполните все поля", "Ошибка");
@@ -275,6 +283,7 @@ namespace StaffManagement.ViewModel
                         NewEmployeeName = "";
                         NewEmployeeSurname = "";
                         NewEmployeePatronymic = "";
+                        win.Close();
                     }
                 }
                 );
@@ -357,6 +366,8 @@ namespace StaffManagement.ViewModel
             {
                 return _editDepartmentCommand ?? new RelayCommand(obj =>
                 {
+                    Window win = obj as Window;
+
                     if (SelectedDepartment == null)
                     {
                         EditDepartmentCommand.CanExecute(false);
@@ -374,6 +385,7 @@ namespace StaffManagement.ViewModel
                             DataWorker.EditDepartment(SelectedDepartment, NewDepartmentName);
                             UpdateAllListViews();
                             NewDepartmentName = "";
+                            win.Close();
                         }
 
                     }
@@ -389,6 +401,8 @@ namespace StaffManagement.ViewModel
             {
                 return _editPositionCommand ?? new RelayCommand(obj =>
                 {
+                    Window win = obj as Window;
+                    
                     if (SelectedPosition == null)
                     {
                         EditPositionCommand.CanExecute(false);
@@ -407,6 +421,7 @@ namespace StaffManagement.ViewModel
                             NewPositionName = "";
                             NewPositionSalary = 0;
                             NewPositionMaxStaff = 0;
+                            win.Close();
                         }
 
                     }
@@ -422,6 +437,8 @@ namespace StaffManagement.ViewModel
             {
                 return _editEmployeeCommand ?? new RelayCommand(obj =>
                 {
+                    Window win = obj as Window;
+
                     if (SelectedEmployee == null)
                     {
                         EditEmployeeCommand.CanExecute(false);
@@ -440,6 +457,7 @@ namespace StaffManagement.ViewModel
                             NewEmployeeName = "";
                             NewEmployeeSurname = "";
                             NewEmployeePatronymic = "";
+                            win.Close();
 
                         }
                     }

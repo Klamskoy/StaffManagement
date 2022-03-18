@@ -28,6 +28,7 @@
                       DisplayMemberPath="Name"/>
         </StackPanel>
         <Button Grid.Row="1" Content="Редактировать сотрудника"
-                Command="{Binding EditEmployeeCommand}"/>
+                Command="{Binding EditEmployeeCommand}"
+                CommandParameter="{Binding ElementName=EditEmployeeWnd}"/>
     </Grid>
 </Window>
