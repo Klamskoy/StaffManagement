@@ -23,90 +23,7 @@ namespace StaffManagement.ViewModel
         public string NewEmployeePatronymic { get; set; }
         public Position NewEmployeePosition { get; set; }
 
-        #region ADD/EDIT WINDOWS OPENING COMMANDS
-        private RelayCommand _showAddNewEmployee;
-        public RelayCommand ShowAddNewEmployee
-        {
-            get
-            {
-                return _showAddNewEmployee ?? new RelayCommand(obj =>
-                {
-                    DataWorker.ShowAddNewEmployeeWindow();
-                }
-                );
-            }
-        }
-
-        private RelayCommand _showAddNewPosition;
-        public RelayCommand ShowAddNewPosition
-        {
-            get
-            {
-                return _showAddNewPosition ?? new RelayCommand(obj =>
-                {
-                    DataWorker.ShowAddNewPositionWindow();
-                }
-                );
-            }
-        }
-
-        private RelayCommand _showAddNewDepartment;
-        public RelayCommand ShowAddNewDepartment
-        {
-            get
-            {
-                return _showAddNewDepartment ?? new RelayCommand(obj =>
-                {
-                    DataWorker.ShowAddNewDepartmentWindow();
-                }
-                );
-            }
-        }
-
-        private RelayCommand _showEditEmployee;
-        public RelayCommand ShowEditEmployee
-        {
-            get
-            {
-                return _showEditEmployee ?? new RelayCommand(obj =>
-                {
-                    DataWorker.ShowEditEmployeeWindow();
-                }
-                );
-            }
-        }
-
-        private RelayCommand _showEditPosition;
-        public RelayCommand ShowEditPosition
-        {
-            get
-            {
-                return _showEditPosition ?? new RelayCommand(obj =>
-                {
-                    DataWorker.ShowEditPositionWindow();
-                }
-                );
-            }
-        }
-
-        private RelayCommand _showEditDepartment;
-        public RelayCommand ShowEditDepartment
-        {
-            get
-            {
-                return _showEditDepartment ?? new RelayCommand(obj =>
-                {
-                    NewDepartmentName = "";
-                    DataWorker.ShowEditDepartmentWindow();
-                }
-                );
-            }
-        }
-
-        #endregion
-
         private List<Employee> _allEmployees = DataWorker.GetAllEmployees();
-
         public List<Employee> AllEmployees
         {
             get { return _allEmployees; }
@@ -181,59 +98,117 @@ namespace StaffManagement.ViewModel
             }
         }
 
-        #region COMMANDS TO DELETE 
-        private RelayCommand _deleteDepartment;
-        public RelayCommand DeleteDepartment
-        {
-            get
-            {
-                return _deleteDepartment ?? new RelayCommand(obj =>
+        #region ADD/EDIT WINDOWS OPENING COMMANDS
+                private RelayCommand _showAddNewEmployee;
+                public RelayCommand ShowAddNewEmployee
                 {
-                    if(SelectedDepartment == null)
+                    get
                     {
-                        DeleteDepartment.CanExecute(false);
+                        return _showAddNewEmployee ?? new RelayCommand(obj =>
+                        {
+                            DataWorker.ShowAddNewEmployeeWindow();
+                        }
+                        );
                     }
-                    else
+                }
+
+                private RelayCommand _showAddNewPosition;
+                public RelayCommand ShowAddNewPosition
+                {
+                    get
                     {
-                        DataWorker.DeleteDepartment(SelectedDepartment);
-                        UpdateAllListViews();
+                        return _showAddNewPosition ?? new RelayCommand(obj =>
+                        {
+                            DataWorker.ShowAddNewPositionWindow();
+                        }
+                        );
                     }
-                    
                 }
-                );
-            }
-        }
 
-        private RelayCommand _deletePosition;
-        public RelayCommand DeletePosition
-        {
-            get
-            {
-                return _deletePosition ?? new RelayCommand(obj =>
+                private RelayCommand _showAddNewDepartment;
+                public RelayCommand ShowAddNewDepartment
                 {
-                    DataWorker.DeletePosition(SelectedPosition);
-                    UpdateAllListViews();
+                    get
+                    {
+                        return _showAddNewDepartment ?? new RelayCommand(obj =>
+                        {
+                            DataWorker.ShowAddNewDepartmentWindow();
+                        }
+                        );
+                    }
                 }
-                );
-            }
-        }
 
-        private RelayCommand _deleteEmployee;
-        public RelayCommand DeleteEmployee
-        {
-            get
-            {
-                return _deleteEmployee ?? new RelayCommand(obj =>
+                private RelayCommand _showEditEmployee;
+                public RelayCommand ShowEditEmployee
                 {
+                    get
+                    {
+                        return _showEditEmployee ?? new RelayCommand(obj =>
+                        {
+                            if (SelectedEmployee == null)
+                            {
+                                MessageBox.Show("Выберите сотрудника!", "Ошибка");
+                            }
+                            else
+                            {
+                                NewEmployeeName = "";
+                                NewEmployeeSurname = "";
+                                NewEmployeePatronymic = "";
+                                DataWorker.ShowEditEmployeeWindow();
+                            }
 
-                    DataWorker.DeleteEmployee(SelectedEmployee);
-                    UpdateAllListViews();
+                        }
+                        );
+                    }
                 }
-                );
-            }
-        }
 
-        #endregion
+                private RelayCommand _showEditPosition;
+                public RelayCommand ShowEditPosition
+                {
+                    get
+                    {
+                        return _showEditPosition ?? new RelayCommand(obj =>
+                        {
+                            if (SelectedPosition == null)
+                            {
+                                MessageBox.Show("Выберите должность!", "Ошибка");
+                            }
+                            else
+                            {
+                                NewPositionName = "";
+                                NewPositionSalary = 0;
+                                NewPositionMaxStaff = 0;
+                                DataWorker.ShowEditPositionWindow();
+                            }
+
+                        }
+                        );
+                    }
+                }
+
+                private RelayCommand _showEditDepartment;
+                public RelayCommand ShowEditDepartment
+                {
+                    get
+                    {
+                        return _showEditDepartment ?? new RelayCommand(obj =>
+                        {
+                            if (SelectedDepartment == null)
+                            {
+                                MessageBox.Show("Выберите отдел!", "Ошибка");
+                            }
+                            else
+                            {
+                                NewDepartmentName = "";
+                                DataWorker.ShowEditDepartmentWindow();
+                            }
+
+                        }
+                        );
+                    }
+                }
+
+                #endregion
 
         #region COMMANDS TO ADD
         private RelayCommand _addNewDepartmentCommand;
@@ -243,11 +218,18 @@ namespace StaffManagement.ViewModel
             {
                 return _addNewDepartmentCommand ?? new RelayCommand(obj =>
                  {
-                     DataWorker.AddNewDepartment(NewDepartmentName);
-                     UpdateAllListViews();
-                     NewDepartmentName = "";
+                     if (NewDepartmentName == null || NewDepartmentName == "")
+                     {
+                         MessageBox.Show("Заполните поле!", "Ошибка");
+                     }
+                     else
+                     {
+                         DataWorker.AddNewDepartment(NewDepartmentName);
+                         UpdateAllListViews();
+                         NewDepartmentName = "";
+                     }
                  }
-                );
+            );
             }
         }
 
@@ -258,11 +240,18 @@ namespace StaffManagement.ViewModel
             {
                 return _addNewPositionCommand ?? new RelayCommand(obj =>
                 {
-                    DataWorker.AddNewPosition(NewPositionName, NewPositionSalary, NewPositionMaxStaff, NewPositionDepartment);
-                    UpdateAllListViews();
-                    NewPositionName = "";
-                    NewPositionSalary = 0;
-                    NewPositionMaxStaff = 0;
+                    if (NewPositionName == "" || NewPositionSalary == 0 || NewPositionMaxStaff == 0 || NewPositionDepartment == null)
+                    {
+                        MessageBox.Show("Заполните все поля!", "Ошибка");
+                    }
+                    else
+                    {
+                        DataWorker.AddNewPosition(NewPositionName, NewPositionSalary, NewPositionMaxStaff, NewPositionDepartment);
+                        UpdateAllListViews();
+                        NewPositionName = "";
+                        NewPositionSalary = 0;
+                        NewPositionMaxStaff = 0;
+                    }
                 }
                 );
             }
@@ -275,11 +264,84 @@ namespace StaffManagement.ViewModel
             {
                 return _addNewEmployeeCommand ?? new RelayCommand(obj =>
                 {
-                    DataWorker.AddNewEmployee(NewEmployeeName, NewEmployeeSurname, NewEmployeePatronymic, NewEmployeePosition);
-                    UpdateAllListViews();
-                    NewEmployeeName = "";
-                    NewEmployeeSurname = "";
-                    NewEmployeePatronymic = "";
+                    if (NewEmployeeName == "" || NewEmployeeSurname == "" || NewEmployeePatronymic == "" || NewEmployeePosition == null)
+                    {
+                        MessageBox.Show("Заполните все поля", "Ошибка");
+                    }
+                    else
+                    {
+                        DataWorker.AddNewEmployee(NewEmployeeName, NewEmployeeSurname, NewEmployeePatronymic, NewEmployeePosition);
+                        UpdateAllListViews();
+                        NewEmployeeName = "";
+                        NewEmployeeSurname = "";
+                        NewEmployeePatronymic = "";
+                    }
+                }
+                );
+            }
+        }
+
+        #endregion
+
+        #region COMMANDS TO DELETE 
+        private RelayCommand _deleteDepartment;
+        public RelayCommand DeleteDepartment
+        {
+            get
+            {
+                return _deleteDepartment ?? new RelayCommand(obj =>
+                {
+                    if (SelectedDepartment == null)
+                    {
+                        MessageBox.Show("Выберите отдел!", "Ошибка");
+                    }
+                    else
+                    {
+                        DataWorker.DeleteDepartment(SelectedDepartment);
+                        UpdateAllListViews();
+                    }
+                }
+                );
+            }
+        }
+
+        private RelayCommand _deletePosition;
+        public RelayCommand DeletePosition
+        {
+            get
+            {
+                return _deletePosition ?? new RelayCommand(obj =>
+                {
+                    if (SelectedPosition == null)
+                    {
+                        MessageBox.Show("Выберите должность!", "Ошибка");
+                    }
+                    else
+                    {
+                        DataWorker.DeletePosition(SelectedPosition);
+                        UpdateAllListViews();
+                    }
+                }
+                );
+            }
+        }
+
+        private RelayCommand _deleteEmployee;
+        public RelayCommand DeleteEmployee
+        {
+            get
+            {
+                return _deleteEmployee ?? new RelayCommand(obj =>
+                {
+                    if (SelectedEmployee == null)
+                    {
+                        MessageBox.Show("Выберите сотрудника!", "Ошибка");
+                    }
+                    else
+                    {
+                        DataWorker.DeleteEmployee(SelectedEmployee);
+                        UpdateAllListViews();
+                    }
                 }
                 );
             }
@@ -295,7 +357,7 @@ namespace StaffManagement.ViewModel
             {
                 return _editDepartmentCommand ?? new RelayCommand(obj =>
                 {
-                    if(SelectedDepartment == null)
+                    if (SelectedDepartment == null)
                     {
                         EditDepartmentCommand.CanExecute(false);
                         MessageBox.Show("Выберите отдел!", "Ошибка");
@@ -303,10 +365,17 @@ namespace StaffManagement.ViewModel
 
                     else
                     {
+                        if (NewDepartmentName == "")
+                        {
+                            MessageBox.Show("Заполните поле!", "Ошибка");
+                        }
+                        else
+                        {
+                            DataWorker.EditDepartment(SelectedDepartment, NewDepartmentName);
+                            UpdateAllListViews();
+                            NewDepartmentName = "";
+                        }
 
-                        DataWorker.EditDepartment(SelectedDepartment, NewDepartmentName);
-                        UpdateAllListViews();
-                        NewDepartmentName = "";
                     }
                 }
                 );
@@ -320,18 +389,26 @@ namespace StaffManagement.ViewModel
             {
                 return _editPositionCommand ?? new RelayCommand(obj =>
                 {
-                    if(SelectedPosition == null)
+                    if (SelectedPosition == null)
                     {
                         EditPositionCommand.CanExecute(false);
                         MessageBox.Show("Выберите позицию!", "Ошибка");
                     }
                     else
                     {
-                        DataWorker.EditPosition(SelectedPosition, NewPositionName, NewPositionSalary, NewPositionMaxStaff, NewPositionDepartment.Id);
-                        UpdateAllListViews();
-                        NewPositionName = "";
-                        NewPositionSalary = 0;
-                        NewPositionMaxStaff = 0;
+                        if (NewPositionName == "" || NewPositionSalary == 0 || NewPositionMaxStaff == 0 || NewPositionDepartment == null)
+                        {
+                            MessageBox.Show("Заполните все поля!", "Ошибка");
+                        }
+                        else
+                        {
+                            DataWorker.EditPosition(SelectedPosition, NewPositionName, NewPositionSalary, NewPositionMaxStaff, NewPositionDepartment.Id);
+                            UpdateAllListViews();
+                            NewPositionName = "";
+                            NewPositionSalary = 0;
+                            NewPositionMaxStaff = 0;
+                        }
+
                     }
                 }
                 );
@@ -345,19 +422,26 @@ namespace StaffManagement.ViewModel
             {
                 return _editEmployeeCommand ?? new RelayCommand(obj =>
                 {
-                    if(SelectedEmployee == null)
+                    if (SelectedEmployee == null)
                     {
                         EditEmployeeCommand.CanExecute(false);
                         MessageBox.Show("Выберите позицию!", "Ошибка");
                     }
                     else
                     {
-                        DataWorker.EditEmployee(SelectedEmployee, NewEmployeeName, NewEmployeeSurname, NewEmployeePatronymic, NewEmployeePosition.Id);
-                        UpdateAllListViews();
-                        NewEmployeeName = "";
-                        NewEmployeeSurname = "";
-                        NewEmployeePatronymic = "";
-                        
+                        if (NewEmployeeName == "" || NewEmployeeSurname == "" || NewEmployeePatronymic == "" || NewEmployeePosition == null)
+                        {
+                            MessageBox.Show("Заполните все поля", "Ошибка");
+                        }
+                        else
+                        {
+                            DataWorker.EditEmployee(SelectedEmployee, NewEmployeeName, NewEmployeeSurname, NewEmployeePatronymic, NewEmployeePosition.Id);
+                            UpdateAllListViews();
+                            NewEmployeeName = "";
+                            NewEmployeeSurname = "";
+                            NewEmployeePatronymic = "";
+
+                        }
                     }
                 }
                 );
@@ -365,6 +449,7 @@ namespace StaffManagement.ViewModel
         }
 
         #endregion
+
         public void UpdateAllListViews()
         {
             AllDepartments = DataWorker.GetAllDepartments();
@@ -396,7 +481,7 @@ namespace StaffManagement.ViewModel
             }
         }
 
-       
+
 
 
     }

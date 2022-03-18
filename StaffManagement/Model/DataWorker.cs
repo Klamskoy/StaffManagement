@@ -48,6 +48,107 @@ namespace StaffManagement.Model
 
         #endregion
 
+        #region METHODS TO ADD
+        public static void AddNewDepartment(string name)
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                Department newDepartment = new Department() { Name = name };
+                db.Departments.Add(newDepartment);
+                db.SaveChanges();
+
+            }
+        }
+
+        public static void AddNewPosition(string name, int salary, int maxStaff, Department department)
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                Position newPosition = new Position() { Name = name, Salary = salary, MaxCountOfStaff = maxStaff, Department = department, DepartmentId = department.Id };
+                db.Positions.Add(newPosition);
+                db.SaveChanges();
+            }
+        }
+
+        public static void AddNewEmployee(string name, string surname, string patronymic, Position position)
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                Employee newEmployee = new Employee() { Name = name, Surname = surname, Patronymic = patronymic, Position = position, PositionId = position.Id };
+                db.Employees.Add(newEmployee);
+                db.SaveChanges();
+            }
+        }
+        #endregion
+
+        #region METHODS TO DELETE
+        public static void DeleteDepartment(Department department)
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                db.Departments.Remove(department);
+                db.SaveChanges();
+            }
+        }
+
+        public static void DeletePosition(Position position)
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                db.Positions.Remove(position);
+                db.SaveChanges();
+            }
+        }
+
+        public static void DeleteEmployee(Employee employee)
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                db.Employees.Remove(employee);
+                db.SaveChanges();
+            }
+        }
+
+        #endregion
+
+        #region METHODS TO EDIT
+        public static void EditDepartment(Department selectedDepartment, string newName)
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                Department department = db.Departments.Where(u => u.Name == selectedDepartment.Name).FirstOrDefault();
+                department.Name = newName;
+                db.SaveChanges();
+            }
+        }
+
+        public static void EditPosition(Position selectedPosition, string newName, int newSalary, int newMaxStaff, int newDepartmentId)
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                Position position = db.Positions.Where(u => u.Name == selectedPosition.Name).FirstOrDefault();
+                position.Name = newName;
+                position.Salary = newSalary;
+                position.MaxCountOfStaff = newMaxStaff;
+                position.DepartmentId = newDepartmentId;
+                db.SaveChanges();
+            }
+        }
+
+        public static void EditEmployee(Employee selectedEmployee, string newName, string newSurname, string newPatronymic, int newPositionId)
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                Employee employee = db.Employees.Where(u => u.Name == selectedEmployee.Name).FirstOrDefault();
+                employee.Name = newName;
+                employee.Surname = newSurname;
+                employee.Patronymic = newPatronymic;
+                employee.PositionId = newPositionId;
+                db.SaveChanges();
+            }
+        }
+        #endregion
+
         public static List<Employee> GetAllEmployees()
         {
             var result = new List<Employee>();
@@ -103,99 +204,6 @@ namespace StaffManagement.Model
             return res;
         }
 
-        public static void AddNewDepartment(string name)
-        {
-            using(ApplicationContext db = new ApplicationContext())
-            {
-                Department newDepartment = new Department() { Name = name };
-                db.Departments.Add(newDepartment);
-                db.SaveChanges();
-                
-            }
-        }
-
-        public static void AddNewPosition(string name, int salary, int maxStaff, Department department)
-        {
-            using(ApplicationContext db = new ApplicationContext())
-            {   
-                Position newPosition = new Position() { Name = name, Salary = salary, MaxCountOfStaff = maxStaff, Department = department, DepartmentId = department.Id };
-                db.Positions.Add(newPosition);
-                db.SaveChanges();
-            }
-        }
-
-        public static void AddNewEmployee(string name, string surname, string patronymic, Position position)
-        {
-            using(ApplicationContext db = new ApplicationContext())
-            {
-                Employee newEmployee = new Employee() { Name = name, Surname = surname, Patronymic = patronymic, Position = position, PositionId = position.Id };
-                db.Employees.Add(newEmployee);
-                db.SaveChanges();
-            }
-        }
-
-        public static void DeleteDepartment(Department department)
-        {
-            using (ApplicationContext db = new ApplicationContext())
-            {
-                db.Departments.Remove(department);
-                db.SaveChanges();
-            }
-        }
-
-        public static void DeletePosition(Position position)
-        {
-            using (ApplicationContext db = new ApplicationContext())
-            {
-                db.Positions.Remove(position);
-                db.SaveChanges();
-            }
-        }
-
-        public static void DeleteEmployee(Employee employee)
-        {
-            using (ApplicationContext db = new ApplicationContext())
-            {
-                db.Employees.Remove(employee);
-                db.SaveChanges();
-            }
-        }
-
-        public static void EditDepartment(Department selectedDepartment, string newName)
-        {
-            using(ApplicationContext db = new ApplicationContext())
-            {
-                Department department = db.Departments.Where(u => u.Name == selectedDepartment.Name).FirstOrDefault();
-                department.Name = newName;
-                db.SaveChanges();
-            }
-        }
-
-        public static void EditPosition(Position selectedPosition, string newName, int newSalary, int newMaxStaff, int newDepartmentId)
-        {
-            using(ApplicationContext db = new ApplicationContext())
-            {
-                Position position = db.Positions.Where(u => u.Name == selectedPosition.Name).FirstOrDefault();
-                position.Name = newName;
-                position.Salary = newSalary;
-                position.MaxCountOfStaff = newMaxStaff;
-                position.DepartmentId = newDepartmentId;
-                db.SaveChanges();
-            }
-        }
-
-        public static void EditEmployee(Employee selectedEmployee, string newName, string newSurname, string newPatronymic, int newPositionId)
-        {
-            using(ApplicationContext db = new ApplicationContext())
-            {
-                Employee employee = db.Employees.Where(u => u.Name == selectedEmployee.Name).FirstOrDefault();
-                employee.Name = newName;
-                employee.Surname = newSurname;
-                employee.Patronymic = newPatronymic;
-                employee.PositionId = newPositionId;
-                db.SaveChanges();
-            }
-        }
 
 
     }
