@@ -74,9 +74,17 @@ namespace StaffManagement.Model
         {
             using (ApplicationContext db = new ApplicationContext())
             {
-                Employee newEmployee = new Employee() { Name = name, Surname = surname, Patronymic = patronymic, Position = position, PositionId = position.Id };
-                db.Employees.Add(newEmployee);
-                db.SaveChanges();
+                if(db.Employees.Where(u => u.PositionId == position.Id).Count() < db.Positions.Where(u => u.Id == position.Id).First().MaxCountOfStaff )
+                {
+                    Employee newEmployee = new Employee() { Name = name, Surname = surname, Patronymic = patronymic, Position = position, PositionId = position.Id };
+                    db.Employees.Add(newEmployee);
+                    db.SaveChanges();
+                }
+                else
+                {
+                    MessageBox.Show("Штат сотрудников на данную должность полон", "Ошибка");
+                }
+
             }
         }
         #endregion

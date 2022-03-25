@@ -30,7 +30,7 @@ namespace StaffManagement.Model
             {
                 using(ApplicationContext db = new ApplicationContext())
                 {
-                    return db.Positions.Count();
+                    return db.Employees.Where(u => u.PositionId == Id).Count();
                 }
             }
         }
