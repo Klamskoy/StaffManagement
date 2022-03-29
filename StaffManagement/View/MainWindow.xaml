@@ -21,9 +21,11 @@
             <Setter Property="Height" Value="50"/>
         </Style>
         <Style TargetType="ListViewItem">
-            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
         </Style>
     </Window.Resources>
+    
     <Grid>
         <TabControl>
             <TabItem Header="Сотрудники">
@@ -34,6 +36,11 @@
                     </Grid.ColumnDefinitions>
                     <ListView Name="AllEmployeesListView" ItemsSource="{Binding AllEmployees}"
                               SelectedItem="{Binding SelectedEmployee}">
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="{x:Type ListViewItem}">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
+                            </Style>
+                        </ListView.ItemContainerStyle>
                         <ListView.View>
                             <GridView AllowsColumnReorder="true">
                                 <GridViewColumn Header="Фамилия" Width="100"
@@ -42,10 +49,20 @@
                                                 DisplayMemberBinding="{Binding Path=Name}"/>
                                 <GridViewColumn Header="Отчество" Width="120"
                                                 DisplayMemberBinding="{Binding Path=Patronymic}"/>
-                                <GridViewColumn Header="Должность" Width="120"
-                                                DisplayMemberBinding="{Binding Path=GetPositionByIdProp.Name}"/>
-                                <GridViewColumn Header="Оклад" Width="100"
-                                                DisplayMemberBinding="{Binding Path=GetPositionByIdProp.Salary}"/>
+                                <GridViewColumn Header="Должность" Width="120">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Path=GetPositionByIdProp.Name}" TextWrapping="Wrap" Margin="5"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="Оклад" Width="100">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Path=GetPositionByIdProp.Salary}" HorizontalAlignment="Center"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
                             </GridView>
                         </ListView.View>
                     </ListView>
@@ -68,19 +85,49 @@
                     </Grid.ColumnDefinitions>
                     <ListView Name="AllPositionsListView" ItemsSource="{Binding AllPositions}"
                               SelectedItem="{Binding SelectedPosition}">
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="{x:Type ListViewItem}">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
+                            </Style>
+                        </ListView.ItemContainerStyle>
                         <ListView.View>
                             <GridView AllowsColumnReorder="true" >
-                                <GridViewColumn Header="Название" Width="100"
-                                                
-                                                DisplayMemberBinding="{Binding Path=Name}"/>
-                                <GridViewColumn Header="Отдел" Width="110"
-                                                DisplayMemberBinding="{Binding Path=GetDepartmentByIdProp.Name}"/>
-                                <GridViewColumn Header="Оклад" Width="120"
-                                                DisplayMemberBinding="{Binding Path=Salary}"/>
-                                <GridViewColumn Header="Текущий штат" Width="120"
-                                                DisplayMemberBinding="{Binding Path=CurrentCount}"/>
-                                <GridViewColumn Header="Макс. штат" Width="100"
-                                                DisplayMemberBinding="{Binding Path=MaxCountOfStaff}"/>
+                                <GridViewColumn Header="Название" Width="110">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Path=Name}" TextWrapping="Wrap"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="Отдел" Width="140">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Path=GetDepartmentByIdProp.Name}" TextWrapping="Wrap"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="Оклад" Width="90">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Path=Salary}" HorizontalAlignment="Center"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="Текущий штат" Width="100">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Path=CurrentCount}" HorizontalAlignment="Center"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="Макс. штат" Width="100">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Path=MaxCountOfStaff}" HorizontalAlignment="Center"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                            
                             </GridView>
                         </ListView.View>
                     </ListView>
@@ -102,12 +149,27 @@
                     </Grid.ColumnDefinitions>
                     <ListView Name="AllDepartmentsListView" ItemsSource="{Binding AllDepartments}"
                               SelectedItem="{Binding SelectedDepartment, Mode=TwoWay}">
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="{x:Type ListViewItem}">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
+                            </Style>
+                        </ListView.ItemContainerStyle>
                         <ListView.View>
                             <GridView AllowsColumnReorder="true">
-                                <GridViewColumn Header="Название отдела" Width="350"
-                                                DisplayMemberBinding="{Binding Path=Name}"/>
-                                <GridViewColumn Header="Количество должностей" Width="200"
-                                                DisplayMemberBinding="{Binding Path=PositionCount}"/>
+                                <GridViewColumn Header="Название отдела" Width="350">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Path=Name}" HorizontalAlignment="Left" Margin="5"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="Количество должностей" Width="200">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Path=PositionCount}" HorizontalAlignment="Center"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
                             </GridView>
                         </ListView.View>
                     </ListView>

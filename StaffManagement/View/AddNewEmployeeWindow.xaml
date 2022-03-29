@@ -16,10 +16,10 @@
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
         <StackPanel VerticalAlignment="Center" Width="200">
-            <TextBlock Text="Имя"/>
-            <TextBox Name="NameBlock" Text="{Binding NewEmployeeName}"/>
             <TextBlock Text="Фамилия"/>
-            <TextBox Name="SurnameBlock" Text="{Binding NewEmployeeSurname}"/>
+            <TextBox Name="NameBlock" Text="{Binding NewEmployeeSurname}"/>
+            <TextBlock Text="Имя"/>
+            <TextBox Name="SurnameBlock" Text="{Binding NewEmployeeName}"/>
             <TextBlock Text="Отчество"/>
             <TextBox Name="PatronymicBlock" Text="{Binding NewEmployeePatronymic}"/>
             <TextBlock Text="Должность"/>
